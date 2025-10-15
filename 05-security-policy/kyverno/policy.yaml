@@ -1,0 +1,17 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-nginx-latest
+spec:
+  rules:
+  - name: check-image
+    match:
+      resources:
+        kinds:
+        - Pod
+    validate:
+      message: "Disallow nginx:latest image"
+      pattern:
+        spec:
+          containers:
+          - image: "!nginx:latest"
