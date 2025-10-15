@@ -1,0 +1,10 @@
+groups:
+- name: frontend-alerts
+  rules:
+  - alert: FrontendDown
+    expr: up{job="kubernetes"} == 0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Frontend service is down"
